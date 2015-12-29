@@ -2,7 +2,8 @@ var express = require('express');
 var app = express();
 
 app.get('/', function (req, res) {
-	console.log('request from %s', res.ip);
+	var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+	console.log('request from %s', ip);
 	res.send('Hello World!');
 });
 
